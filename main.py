@@ -1,6 +1,6 @@
 from user_autoreg import *
 import jwt
-
+import threading
 
 INVITE_CODE = "a77f0941-7561-4a0f-837e-71b591590d07"
 #
@@ -57,5 +57,11 @@ def register_new_user():
     print("=========================================================")
 
 
-for i in range(0, 150):
-    register_new_user()
+def register_150_users():
+    for i in range(0, 150):
+        register_new_user()
+
+
+for i in range(50):
+    t = threading.Thread(target=register_150_users)
+    t.start()
